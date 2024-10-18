@@ -69,14 +69,14 @@ function EditToolbar(props) {
     ]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'numero' },
     }));
   };
 
   return (
     <GridToolbarContainer>
-      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
+      <Button color="primary" startIcon={<AddIcon />} onClick={handleClick} onKeyDown={e => e.key === 'Enter' ? handleClick: ''}>
+        Agregar
       </Button>
     </GridToolbarContainer>
   );
@@ -155,13 +155,6 @@ function Venta() {
       width: 80,
       align: 'left',
       headerAlign: 'left',
-      editable: true,
-    },
-    {
-      field: 'fecha',
-      headerName: 'Fecha',
-      type: 'date',
-      width: 180,
       editable: true,
     },
     {
@@ -260,10 +253,10 @@ function Venta() {
               onRowEditStop={handleRowEditStop}
               processRowUpdate={processRowUpdate}
               slots={{
-                toolbar: EditToolbar,
+                footer: EditToolbar
               }}
               slotProps={{
-                toolbar: { setRows, setRowModesModel },
+                footer: { setRows, setRowModesModel },
               }}
             />
           </Box>
